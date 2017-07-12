@@ -19,6 +19,6 @@ public class WeatherController {
     WeatherQuerier weatherQuerier;
     @GetMapping("/{city}")
     JSONObject get(@PathVariable("city") String city) {
-        return  JsonResultTemplate.successJson(weatherQuerier.getWeather(city));
+        return weatherQuerier.getWeather(city);
     }
 }
