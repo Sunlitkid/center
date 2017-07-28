@@ -4,9 +4,4 @@ db.mysql.username=
 db.mysql.password=
 db.mysql.driver=
 
-
-
-weather.url=
-weather.appkey=
-
 server.port=
