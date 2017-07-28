@@ -1,5 +1,5 @@
 db.mysql.ip=
-db.mysql.prot=
+db.mysql.port=
 db.mysql.username=
 db.mysql.password=
 db.mysql.driver=
