@@ -1,18 +1,33 @@
 package com.sunlitkid.center.common.template;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sunlitkid.center.common.bean.Command;
+
 /**
  * Created by sunke on 2017/7/7.
  */
 public class JsonResultTemplate {
-    private static final String CODE_SUCCESS_BOOLEAN = "0000";
-    private static final String CODE_SUCCESS_STRING = "0001";
-    private static final String CODE_SUCCESS_NUMBER = "0002";
-    private static final String CODE_SUCCESS_JSON = "0003";
+
+    private static final String CODE_SUCCESS_COMMAND = "0000";
+    private static final String CODE_SUCCESS_BOOLEAN = "0001";
+    private static final String CODE_SUCCESS_STRING = "0002";
+    private static final String CODE_SUCCESS_NUMBER = "0003";
+    private static final String CODE_SUCCESS_JSON = "0004";
+
+
     private static final String CODE_EXCEPTION = "1000";
     private static final String CODE_ERROR = "2000";
     private static final String CODE_PERMISSION_DENIED = "3000";
+
     private JsonResultTemplate(){};
+
+    ///////////////////success/////////////////////
+    public static JSONObject successJson(Command result){
+        JSONObject json = successJson();
+        json.put("code",CODE_SUCCESS_COMMAND);
+        json.put("data",result.getCommand());
+        return  json;
+    }
     public static JSONObject successJson(Boolean result){
         JSONObject json = successJson();
         json.put("code",CODE_SUCCESS_BOOLEAN);
@@ -44,6 +59,15 @@ public class JsonResultTemplate {
         json.put("date",e.getMessage());
         return  json;
     }
+    //---------------private----------------
+    private static JSONObject successJson(){
+        JSONObject json = new JSONObject();
+        json.put("description","ok");
+        return  json;
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    ////////////////////////error////////////////////////////
     public static JSONObject errorJson(String data){
         JSONObject json = new JSONObject();
         json.put("code",CODE_ERROR);
@@ -58,12 +82,4 @@ public class JsonResultTemplate {
         json.put("data","permission denied");
         return  json;
     }
-
-    //--------------------------------------------------------------------------------------------------
-    private static JSONObject successJson(){
-        JSONObject json = new JSONObject();
-        json.put("description","ok");
-        return  json;
-    }
-
 }

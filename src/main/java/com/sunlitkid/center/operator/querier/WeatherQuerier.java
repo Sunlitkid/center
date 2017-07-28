@@ -1,4 +1,4 @@
-package com.sunlitkid.center.operator;
+package com.sunlitkid.center.operator.querier;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mashape.unirest.http.HttpResponse;
@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.sunlitkid.center.common.template.JsonResultTemplate;
-import com.sunlitkid.center.config.api.WeatherAPIConfig;
+import com.sunlitkid.center.config.WeatherAPIConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
  * Created by sunke on 2017/7/7.
  * 天气查询器
  */
-
 @Service
 public class WeatherQuerier {
     @Autowired
@@ -30,7 +29,6 @@ public class WeatherQuerier {
             e.printStackTrace();
             return JsonResultTemplate.exceptionJson(e);
         }
-
     }
 
     private JSONObject format(JSONObject object){
