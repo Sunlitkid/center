@@ -1,7 +1,7 @@
 package com.sunlitkid.center.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sunlitkid.center.common.util.ConfigLoader;
+import com.sunlitkid.center.operator.loader.ConfigLoader;
 import org.springframework.stereotype.Service;
 /**
  * Created by huaching on 2017/7/7.

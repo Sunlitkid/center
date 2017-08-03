@@ -1,4 +1,4 @@
-package com.sunlitkid.center.common.template;
+package com.sunlitkid.center.common.dateFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sunlitkid.center.common.bean.Command;
@@ -6,7 +6,7 @@ import com.sunlitkid.center.common.bean.Command;
 /**
  * Created by sunke on 2017/7/7.
  */
-public class JsonResultTemplate {
+public class JsonFactory {
 
     private static final String CODE_SUCCESS_COMMAND = "0000";
     private static final String CODE_SUCCESS_BOOLEAN = "0001";
@@ -19,7 +19,7 @@ public class JsonResultTemplate {
     private static final String CODE_ERROR = "2000";
     private static final String CODE_PERMISSION_DENIED = "3000";
 
-    private JsonResultTemplate(){};
+    private JsonFactory(){};
 
     ///////////////////success/////////////////////
     public static JSONObject successJson(Command result){

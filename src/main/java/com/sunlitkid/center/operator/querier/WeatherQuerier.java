@@ -5,7 +5,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sunlitkid.center.common.template.JsonResultTemplate;
+import com.sunlitkid.center.common.dateFactory.JsonFactory;
 import com.sunlitkid.center.config.WeatherAPIConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,19 +27,19 @@ public class WeatherQuerier {
             return  format(object);
         } catch (UnirestException e) {
             e.printStackTrace();
-            return JsonResultTemplate.exceptionJson(e);
+            return JsonFactory.exceptionJson(e);
         }
     }
 
     private JSONObject format(JSONObject object){
         if("10000".equals(object.get("code"))){
-            return  JsonResultTemplate.successJson(object.getJSONObject("result"));
+            return  JsonFactory.successJson(object.getJSONObject("result"));
         }
         String error= object.getString("msg");
         if(error==null){
-            return  JsonResultTemplate.errorJson("未查询到数据");
+            return  JsonFactory.errorJson("未查询到数据");
         }else{
-            return  JsonResultTemplate.errorJson(error);
+            return  JsonFactory.errorJson(error);
         }
     }
 }
