@@ -1,5 +1,7 @@
 package com.sunlitkid.center.operator.timer;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.*;
 
 /**
@@ -16,20 +18,59 @@ public class CenterTimer {
             }
         },new Date(),24*60*60*1000);
     }
-    public static String startTask(String taskName,TimerTask task, Date startDate){
-        TimerTaskEntry taskEntry =  new TimerTaskEntry(taskName,startDate,task);
-        String uuid =UUID.randomUUID().toString();
-        tasks.put(uuid,taskEntry);
-        timer.schedule(task,startDate);
-        return uuid;
+
+    /**
+     * 开启一个once任务
+     * @param taskName
+     * @param task
+     * @param startDate
+     * @return
+     */
+    public static JSONObject startTask(String taskName,TimerTask task, Date startDate){
+        try{
+            timer.schedule(task,startDate);
+            TimerTaskEntry taskEntry =  new TimerTaskEntry(taskName,startDate,task);
+            String uuid =UUID.randomUUID().toString();
+            tasks.put(uuid,taskEntry);
+            JSONObject json = new JSONObject();
+            json.put(uuid,taskEntry);
+            return json;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }
     }
-    public static String startTask(String taskName,TimerTask task, Date startDate,long period){
-        TimerTaskEntry taskEntry =  new TimerTaskEntry(taskName,startDate,task,period);
-        String uuid =UUID.randomUUID().toString();
-        tasks.put(uuid,taskEntry);
-        timer.schedule(task,startDate,period);
-        return uuid;
+
+    /**
+     * 开启一个loop任务
+     * @param taskName
+     * @param task
+     * @param startDate
+     * @param period
+     * @return
+     */
+    public static JSONObject startTask(String taskName,TimerTask task, Date startDate,long period){
+        try{
+            timer.schedule(task,startDate,period);
+            TimerTaskEntry taskEntry =  new TimerTaskEntry(taskName,startDate,task,period);
+            String uuid =UUID.randomUUID().toString();
+            tasks.put(uuid,taskEntry);
+            JSONObject json = new JSONObject();
+            json.put(uuid,taskEntry);
+            return json;
+        }catch (IllegalStateException e){
+            e.printStackTrace();
+            refreshTasks();
+            restartTimer();
+            return  null;
+        }
     }
+
+    /**
+     * 根据uuid停止一个任务
+     * @param uuid
+     * @return
+     */
     public static boolean stopTask(String uuid){
         TimerTaskEntry taskEntry =tasks.get(uuid);
         if(taskEntry==null){
@@ -42,7 +83,7 @@ public class CenterTimer {
     }
 
     /**
-     * 刷新任务
+     * 刷新全部任务
      * 一次性任务没执行的保留，执行了的删除
      * 循环任务不处理
      */
@@ -59,7 +100,7 @@ public class CenterTimer {
     }
 
     /**
-     * 重启任务
+     * 重启全部任务
      */
     public static void restartTimer(){
         Timer newTimer = new Timer();
@@ -78,6 +119,10 @@ public class CenterTimer {
         timer =newTimer;
     }
 
+
+    public static Map<String,TimerTaskEntry> getTasks(){
+        return  tasks;
+    }
     private static class TimerTaskEntry{
         private String name;
         private Date startDate;
@@ -130,4 +175,6 @@ public class CenterTimer {
             this.startDate = startDate;
         }
     }
+
+
 }
