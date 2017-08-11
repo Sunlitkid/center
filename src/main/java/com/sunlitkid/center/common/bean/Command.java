@@ -1,7 +1,7 @@
 package com.sunlitkid.center.common.bean;
 
 /**
- * Created by sunke on 2017/7/27.
+ * Created by sunlitkid on 2017/7/27.
  */
 public class Command {
     private  String command;

@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.TimerTask;
 
 /**
- * Created by sunke on 2017/8/8.
+ * Created by sunlitkid on 2017/8/8.
  */
 public class HumidityTask extends TimerTask{
     @Override

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sunlitkid.center.common.bean.Command;
 
 /**
- * Created by sunke on 2017/7/7.
+ * Created by sunlitkid on 2017/7/7.
  */
 public class JsonFactory {
 

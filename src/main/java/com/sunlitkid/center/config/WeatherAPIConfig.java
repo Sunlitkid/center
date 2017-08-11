@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sunlitkid.center.operator.loader.ConfigLoader;
 import org.springframework.stereotype.Service;
 /**
- * Created by huaching on 2017/7/7.
+ * Created by sunlitkid on 2017/7/7.
  */
 @Service
 public class WeatherAPIConfig {
