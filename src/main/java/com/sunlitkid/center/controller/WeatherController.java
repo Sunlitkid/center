@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class WeatherController {
     @Autowired
     WeatherQuerier weatherQuerier;
-    @Autowired
-    ConfigLoader loader;
     @GetMapping("/{city}")
     JSONObject get(@PathVariable("city") String city) {
         return weatherQuerier.getWeather(city);
